@@ -1,0 +1,32 @@
+spring:
+  profiles:
+    active: local
+---
+spring:
+  profiles: local
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/notification-service
+    username: root
+    password: Zaman3027
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
+      key-serializer: org.apache.kafka.common.serialization.LongSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    template:
+      default-topic: sms-request
+    admin:
+      properties:
+        bootstrap:
+          servers: localhost:9092,localhost:9093,localhost:9094
